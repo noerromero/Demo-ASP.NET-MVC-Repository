@@ -14,6 +14,11 @@
     <None Remove="Models\Repository\" />
     <None Remove="Infrastructure\" />
     <None Remove="Infrastructure\Persistence\" />
+    <None Remove="Infrastructure\Persistence\InMemory\" />
+    <None Remove="Infrastructure\Persistence\SQLite\" />
+    <None Remove="Microsoft.EntityFrameworkCore" />
+    <None Remove="Microsoft.EntityFrameworkCore.Design" />
+    <None Remove="Microsoft.EntityFrameworkCore.Sqlite" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="ViewModel\" />
@@ -22,9 +27,16 @@
     <Folder Include="Models\Repository\" />
     <Folder Include="Infrastructure\" />
     <Folder Include="Infrastructure\Persistence\" />
+    <Folder Include="Infrastructure\Persistence\InMemory\" />
+    <Folder Include="Infrastructure\Persistence\SQLite\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="bootstrap" Version="5.2.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.2">
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+      <PrivateAssets>all</PrivateAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Sqlite" Version="7.0.2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\.editorconfig" />

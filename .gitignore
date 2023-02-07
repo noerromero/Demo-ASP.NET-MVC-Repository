@@ -396,3 +396,9 @@ FodyWeavers.xsd
 
 # JetBrains Rider
 *.sln.iml
+
+# SQLite Data
+AtencionClienteMVC/CustomerSupportDB.db
+AtencionClienteMVC/CustomerSupportDB.db-shm
+AtencionClienteMVC/CustomerSupportDB.db-wal
+.DS_Store

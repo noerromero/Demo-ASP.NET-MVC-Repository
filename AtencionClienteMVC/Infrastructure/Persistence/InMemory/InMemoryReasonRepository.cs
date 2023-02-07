@@ -1,7 +1,7 @@
 ﻿using AtencionClienteMVC.Models;
 using AtencionClienteMVC.Models.Repository;
 
-namespace AtencionClienteMVC.Infrastructure.Persistence
+namespace AtencionClienteMVC.Infrastructure.Persistence.InMemory
 {
     public class InMemoryReasonRepository : IReasonRepository
 	{

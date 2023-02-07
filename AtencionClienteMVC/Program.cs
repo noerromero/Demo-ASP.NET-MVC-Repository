@@ -1,14 +1,22 @@
-﻿using AtencionClienteMVC.Infrastructure.Persistence;
+﻿using AtencionClienteMVC.Infrastructure.Persistence.InMemory;
+using AtencionClienteMVC.Infrastructure.Persistence.SQLite;
 using AtencionClienteMVC.Models.Repository;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 
 //add manually
-builder.Services.AddScoped<ICustomerSupportRepository, InMemoryCustomerSupportRepository>();
+//builder.Services.AddScoped<ICustomerSupportRepository, InMemoryCustomerSupportRepository>();
+builder.Services.AddScoped<ICustomerSupportRepository, SQLiteCustomerSupportRepository>();
 builder.Services.AddScoped<IGenderRepository, InMemoryGenderRepository>();
 builder.Services.AddScoped<IReasonRepository, InMemoryReasonRepository>();
 
-// Add services to the container.
+//add manually
+builder.Services.AddDbContext<Context>(x => {
+    x.UseSqlite(builder.Configuration.GetConnectionString("DefaultConnection"));
+});
+
+// Add manually services to the container.
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();

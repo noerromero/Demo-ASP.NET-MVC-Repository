@@ -119,7 +119,7 @@ namespace AtencionClienteMVC.Controllers
             else {
                 _customerSupportRepository.Update(new CustomerSupport()
                 {
-                    Id = id.Value,
+                    Id = result.Id,
                     Name = model.customerSupport.Name ?? result.Name ,
                     LastName = model.customerSupport.LastName ?? result.LastName,
                     Mobile = model.customerSupport.Mobile ?? result.Mobile,

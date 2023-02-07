@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CustomerSupportViewModel>
+﻿@model IEnumerable<CustomerSupportResponseViewModel>
 
 @{
     ViewData["Title"] = "Formulario de atención al cliente";
@@ -32,7 +32,7 @@
                 <td>@item.LastName</td>
                 <td>@item.Mobile</td>
                 <td>@item.Email</td>
-                <td>@item.Genre</td>
+                <td>@item.Gender</td>
                 <td>@item.Reason</td>
                 <td>@item.ContactDate</td>
                 <td><a asp-controller="CustomerSupport" asp-action="AddOrEdit" asp-route-id="@item.Id">Editar</a></td>

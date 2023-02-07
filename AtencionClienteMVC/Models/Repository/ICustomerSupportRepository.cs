@@ -1,5 +1,4 @@
-﻿using System;
-namespace AtencionClienteMVC.Models.Repository
+﻿namespace AtencionClienteMVC.Models.Repository
 {
 	public interface ICustomerSupportRepository
 	{

@@ -1,16 +1,22 @@
-﻿namespace AtencionClienteMVC.Models
+﻿namespace AtencionClienteMVC.ViewModel
 {
-    public class CustomerSupport
+    public class CustomerSupportResponseViewModel
 	{
         public Guid Id { get; set; }
+
         public string Name { get; set; } = string.Empty;
+
         public string LastName { get; set; } = string.Empty;
+
         public string Mobile { get; set; } = string.Empty;
+
         public string Email { get; set; } = string.Empty;
-        public int Gender { get; set; } 
-        public int Reason { get; set; } 
+
+        public string Gender { get; set; } = string.Empty;
+
+        public string Reason { get; set; } = string.Empty;
+
         public DateTime ContactDate { get; set; }
-        
-	}
+    }
 }
 

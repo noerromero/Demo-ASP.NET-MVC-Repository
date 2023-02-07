@@ -5,6 +5,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 //add manually
 builder.Services.AddScoped<ICustomerSupportRepository, InMemoryCustomerSupportRepository>();
+builder.Services.AddScoped<IGenderRepository, InMemoryGenderRepository>();
+builder.Services.AddScoped<IReasonRepository, InMemoryReasonRepository>();
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

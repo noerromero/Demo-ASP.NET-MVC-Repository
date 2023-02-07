@@ -1,7 +1,7 @@
-﻿@model CustomerSupportViewModel
+﻿
+@model CustomerSupportMultipleViewModel
 
 @{
-
     ViewData["Title"] = "Formulario de atención al cliente";
 }
 
@@ -15,50 +15,50 @@
         -->
         <form method="post">
             <div class="form-group">
-                <label asp-for="Name">Nombre</label>
-                <input type="text" asp-for="Name" class="form-control" />
-                <span asp-validation-for="Name" class="text-danger"></span>
+                <label asp-for="customerSupport.Name">Nombre</label>
+                <input type="text" asp-for="customerSupport.Name" class="form-control" />
+                <span asp-validation-for="customerSupport.Name" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="LastName">Apellidos</label>
-                <input type="text" asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="customerSupport.LastName">Apellidos</label>
+                <input type="text" asp-for="customerSupport.LastName" class="form-control" />
+                <span asp-validation-for="customerSupport.LastName" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Mobile">Teléfono Celular</label>
-                <input type="text" asp-for="Mobile" class="form-control" />
-                <span asp-validation-for="Mobile" class="text-danger"></span>
+                <label asp-for="customerSupport.Mobile">Teléfono Celular</label>
+                <input type="text" asp-for="customerSupport.Mobile" class="form-control" />
+                <span asp-validation-for="customerSupport.Mobile" class="text-danger"></span>
             </div>
 
             <div class="form-group">
-                <label asp-for="Email">Email</label>
-                <input type="text" asp-for="Email" class="form-control" />
-                <span asp-validation-for="Email" class="text-danger"></span>
+                <label asp-for="customerSupport.Email">Email</label>
+                <input type="text" asp-for="customerSupport.Email" class="form-control" />
+                <span asp-validation-for="customerSupport.Email" class="text-danger"></span>
             </div>
 
             <div class="form-group">
                 <label>Sexo</label><br />
-                @Html.RadioButtonFor(x => x.Genre, "Masculino", htmlAttributes: new { @class = "form-check-input" })
-                <label class="form-check-label">Masculino</label>
-                @Html.RadioButtonFor(x => x.Genre, "Femenino", htmlAttributes: new { @class = "form-check-input" })
-                <label class="form-check-label">Femenino</label>
-                <span asp-validation-for="Genre" class="text-danger"></span>
+                @foreach (var item in Model.genders)
+                {
+                    <input type="radio" asp-for="customerSupport.Gender" value="@item.Value" id="Gender" class="form-check-input" />@item.Text
+                }
+                <br />
+                <span asp-validation-for="customerSupport.Gender" class="text-danger"></span>
             </div>
-
 
             <div class="form-group">
                 <label>Motivo</label>
-                @Html.DropDownListFor(x => x.Reason, new SelectList(
-                    Enum.GetValues(typeof(AtencionClienteMVC.Shared.Enums.Reason))),
+                @Html.DropDownListFor(x => x.customerSupport.Reason, Model.reasons,
                     "Seleccionar", htmlAttributes: new { @class = "form-control" })
-                <span asp-validation-for="Reason" class="text-danger"></span>
+                <span asp-validation-for="customerSupport.Reason" class="text-danger"></span>
             </div>
+
             <br />
             <input type="submit" class="btn btn-primary" value="Guardar" />
             <a class="btn btn-secondary" asp-controller="CustomerSupport" asp-action="Index">Cancelar</a>
-            
+
 
         </form>
     </div>

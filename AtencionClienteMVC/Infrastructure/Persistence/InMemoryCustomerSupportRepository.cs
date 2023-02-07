@@ -1,5 +1,4 @@
-﻿using System;
-using AtencionClienteMVC.Models;
+﻿using AtencionClienteMVC.Models;
 using AtencionClienteMVC.Models.Repository;
 
 namespace AtencionClienteMVC.Infrastructure.Persistence
@@ -33,7 +32,7 @@ namespace AtencionClienteMVC.Infrastructure.Persistence
 				customerSupportForUpdate.LastName = customerSupport.LastName;
 				customerSupportForUpdate.Mobile = customerSupport.Mobile;
 				customerSupportForUpdate.Email = customerSupport.Email;
-				customerSupportForUpdate.Genre = customerSupport.Genre;
+				customerSupportForUpdate.Gender = customerSupport.Gender;
 				customerSupportForUpdate.Reason = customerSupport.Reason;
 				
             }

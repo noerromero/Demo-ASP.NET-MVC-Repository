@@ -34,9 +34,15 @@ namespace AtencionClienteMVC.Infrastructure.Persistence.SQLite
             _context.SaveChanges();
         }
 
-        public IEnumerable<CustomerSupport> SearchAll()
+        public IEnumerable<CustomerSupport> SearchAll(DateTime? startDate, DateTime? endDate)
         {
-            return _context.customerSupports.ToList();
+            if (startDate == null && endDate==null)
+                return _context.customerSupports.ToList();
+
+            return _context.customerSupports
+                .Where(x => x.ContactDate.Date >= startDate && x.ContactDate.Date <= endDate)
+                .ToList();
+
         }
 
         public CustomerSupport? SearchByID(Guid id)

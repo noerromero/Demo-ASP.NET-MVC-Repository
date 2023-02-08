@@ -1,6 +1,6 @@
 ﻿namespace AtencionClienteMVC.ViewModel
 {
-    public class CustomerSupportResponseViewModel
+    public class GetCustomerSupportResponseViewModel
 	{
         public Guid Id { get; set; }
 

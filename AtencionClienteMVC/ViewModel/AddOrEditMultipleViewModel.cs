@@ -2,9 +2,9 @@
 
 namespace AtencionClienteMVC.ViewModel
 {
-	public class CustomerSupportMultipleViewModel
+	public class AddOrEditMultipleViewModel
 	{
-		public CustomerSupportRequestViewModel?  customerSupport { get; set; }
+		public PostCustomerSupportRequestViewModel?  customerSupport { get; set; }
 		public IEnumerable<SelectListItem>? genders { get; set; }
 		public IEnumerable<SelectListItem>? reasons { get; set; }
 	}

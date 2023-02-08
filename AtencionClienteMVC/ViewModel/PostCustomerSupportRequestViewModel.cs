@@ -2,7 +2,7 @@
 
 namespace AtencionClienteMVC.ViewModel
 {
-    public class CustomerSupportRequestViewModel
+    public class PostCustomerSupportRequestViewModel
 	{
         public Guid Id { get; set; }
 

@@ -22,8 +22,15 @@ namespace AtencionClienteMVC.Controllers
             _reasonRepository = reasonRepository ?? throw new ArgumentNullException(nameof(reasonRepository));
         }
 
-        public IActionResult Index() {
-            var customerSupportList = _customerSupportRepository.SearchAll();
+        public IActionResult Index(IndexMultipleViewModel model) {
+            DateTime? startDate = null;
+            DateTime? endDate = null;
+            if (model.RequestViewModel != null)
+            {
+                startDate = model.RequestViewModel.StartDate;
+                endDate = model.RequestViewModel.EndDate;
+            }
+            var customerSupportList = _customerSupportRepository.SearchAll(startDate, endDate);
 
             //var customerSupportViewModelList = new List<CustomerSupportViewModel>();
             var genders = _genderRepository.SearchAll();
@@ -33,7 +40,7 @@ namespace AtencionClienteMVC.Controllers
                                                join gender in genders on customerSupport.Gender equals gender.Id
                                                join reason in reasons on customerSupport.Reason equals reason.Id
                                                select
-                                                new CustomerSupportResponseViewModel()
+                                                new GetCustomerSupportResponseViewModel()
                                                 {
                                                     Id = customerSupport.Id,
                                                     Name = customerSupport.Name,
@@ -45,36 +52,22 @@ namespace AtencionClienteMVC.Controllers
                                                     ContactDate = customerSupport.ContactDate
                                                 };
                                
-            /*
-            foreach (var item in customerSupportList) {
-                customerSupportViewModelList.Add(new CustomerSupportViewModel()
-                {
-                    Id = item.Id,
-                    Name = item.Name,
-                    LastName = item.LastName,
-                    Mobile = item.Mobile,
-                    Email = item.Email,
-                    Gender = item.Gender,
-                    Reason = item.Reason,
-                    ContactDate = item.ContactDate
-                });
-            }
-            */
-
-            return View(customerSupportViewModelList);
+            return View(new IndexMultipleViewModel() {
+                customerSupports = customerSupportViewModelList
+            });
         }
 
         [HttpGet]
         public IActionResult AddOrEdit(Guid id)
         {
             var customerSupport = _customerSupportRepository.SearchByID(id);
-            CustomerSupportMultipleViewModel model = new CustomerSupportMultipleViewModel();
+            AddOrEditMultipleViewModel model = new AddOrEditMultipleViewModel();
 
             model.genders = GetGenders();
             model.reasons = GetReasons();
 
             if (customerSupport != null) {
-                model.customerSupport = new CustomerSupportRequestViewModel()
+                model.customerSupport = new PostCustomerSupportRequestViewModel()
                 {
                     Id = customerSupport.Id,
                     Name = customerSupport.Name,
@@ -92,9 +85,9 @@ namespace AtencionClienteMVC.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddOrEdit(Guid? id, CustomerSupportMultipleViewModel model) {
+        public IActionResult AddOrEdit(Guid? id, AddOrEditMultipleViewModel model) {
             if (!ModelState.IsValid)
-                return View(new CustomerSupportMultipleViewModel()
+                return View(new AddOrEditMultipleViewModel()
                 {
                     genders = GetGenders(),
                     reasons = GetReasons()

@@ -16,8 +16,12 @@ namespace AtencionClienteMVC.Infrastructure.Persistence.InMemory
 			_customerSupportList.Add(customerSupport);
 		}
 
-		public IEnumerable<CustomerSupport> SearchAll() {
-			return _customerSupportList;
+		public IEnumerable<CustomerSupport> SearchAll(DateTime? startDate, DateTime? endDate) {
+            if (startDate == null && endDate == null)
+                return _customerSupportList.ToList();
+			return _customerSupportList
+						.Where(x => x.ContactDate.Date >= startDate && x.ContactDate.Date <= endDate)
+						.ToList();
 		}
 
 		public CustomerSupport? SearchByID(Guid id) {

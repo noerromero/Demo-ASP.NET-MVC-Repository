@@ -1,48 +1,71 @@
-﻿@model IEnumerable<CustomerSupportResponseViewModel>
+﻿@model IndexMultipleViewModel
 
 @{
     ViewData["Title"] = "Formulario de atención al cliente";
 }
 
-<div>
-    <h1>Formulario web de atención al cliente</h1>
-</div>
-<div>
-    <a asp-controller="CustomerSupport" asp-action="AddOrEdit" class="btn btn-primary">Agregar atención</a>
-</div>
-<div>
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Nombre</th>
-                <th>Apellidos</th>
-                <th>Teléfono Celular</th>
-                <th>Email</th>
-                <th>Sexo</th>
-                <th>Motivo</th>
-                <th>Fecha</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        @foreach (var item in Model ?? throw new NullReferenceException())
-        {
-            <tr>
-                <td>@item.Name</td>
-                <td>@item.LastName</td>
-                <td>@item.Mobile</td>
-                <td>@item.Email</td>
-                <td>@item.Gender</td>
-                <td>@item.Reason</td>
-                <td>@item.ContactDate</td>
-                <td><a asp-controller="CustomerSupport" asp-action="AddOrEdit" asp-route-id="@item.Id">Editar</a></td>
-                <td>
-                    <a asp-controller="CustomerSupport" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('¿Está seguro de eliminar?')">
-                        Eliminar
-                    </a>
-                </td>
-            </tr>
-        }
-    </table>
 
-</div>
+    <div>
+        <h1>Formulario web de atención al cliente</h1>
+    </div>
+
+    <form method="get">
+        <div class="row">
+            <div class="col"></div>
+            <div class="col text-end">
+                <label for="startDate" asp-for="RequestViewModel.StartDate">Fecha inicio</label>
+            </div>
+            <div class="col">
+                <input id="startDate" class="form-control" type="date" asp-for="RequestViewModel.StartDate" />
+            </div>
+            <div class="col text-end">
+                <label for="endDate" asp-for="RequestViewModel.EndDate">Fecha fin</label>
+            </div>
+            <div class="col">
+                <input id="endDate" class="form-control" type="date" asp-for="RequestViewModel.EndDate" />
+            </div>
+            <div class="col">
+                <input type="submit" class="btn btn-primary mb-4" value="Buscar" />
+            </div>
+            <div class="col"></div>
+        </div>   
+    </form>
+    <div>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Nombre</th>
+                    <th>Apellidos</th>
+                    <th>Celular</th>
+                    <th>Email</th>
+                    <th>Sexo</th>
+                    <th>Motivo</th>
+                    <th>Fecha</th>
+                    <th colspan="2">
+                        <a asp-controller="CustomerSupport" asp-action="AddOrEdit" class="btn btn-primary">Agregar atención</a>
+                    </th>
+                    
+                </tr>
+            </thead>
+            @foreach (var item in Model.customerSupports ?? throw new NullReferenceException())
+            {
+                <tr>
+                    <td>@item.Name</td>
+                    <td>@item.LastName</td>
+                    <td>@item.Mobile</td>
+                    <td>@item.Email</td>
+                    <td>@item.Gender</td>
+                    <td>@item.Reason</td>
+                    <td>@item.ContactDate.ToString("dd/MM/yyyy")</td>
+                    <td><a asp-controller="CustomerSupport" asp-action="AddOrEdit" asp-route-id="@item.Id">Editar</a></td>
+                    <td>
+                        <a asp-controller="CustomerSupport" asp-action="Delete" asp-route-id="@item.Id" onclick="return confirm('¿Está seguro de eliminar?')">
+                            Eliminar
+                        </a>
+                    </td>
+                </tr>
+            }
+        </table>
+
+    </div>
+
